@@ -1,0 +1,38 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-6">Pokémon</h1>
+
+  <!-- Loading state -->
+  @if (pokemonResourse.isLoading()) {
+  <div class="text-center py-8">
+    <p class="text-lg text-gray-600">Cargando pokémons...</p>
+  </div>
+  }
+
+  <!-- Error state -->
+  @if (pokemonResourse.error()) {
+  <div class="alert alert-error mb-4">
+    <p>Error al cargar los pokémons. Intenta de nuevo.</p>
+  </div>
+  }
+
+  <!-- Success state - Grid of pokémons -->
+  @if (pokemonResourse.value(); as data) { @if (data.results.length > 0) {
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    @for (pokemon of data.results; track pokemon.name) {
+    <div
+      class="card bg-base-100 shadow-md hover:shadow-lg transition-shadow cursor-pointer"
+      [routerLink]="['/poke', pokemon.name]"
+    >
+      <div class="card-body">
+        <h2 class="card-title text-lg capitalize">{{ pokemon.name }}</h2>
+        <p class="text-sm text-gray-500">{{ pokemon.url }}</p>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="alert alert-info">
+    <p>No hay pokémons disponibles</p>
+  </div>
+  } }
+</div>
