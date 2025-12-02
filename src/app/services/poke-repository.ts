@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Pokemon, Pokemons } from '../shared/pokes-types';
+import { Pokemon, Pokemons, Sprites } from '../shared/pokes-types';
 import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 @Injectable({
@@ -30,4 +30,6 @@ export class PokeRepository {
       })
     );
   }
+
+ 
 }

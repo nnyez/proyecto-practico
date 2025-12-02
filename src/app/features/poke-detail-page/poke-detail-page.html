@@ -16,14 +16,12 @@
   <!-- Success state - Pokemon details -->
   @if (pokemonDetail.value(); as pokemon) {
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-    <!-- Left column - Image and basic info -->
     <div class="lg:col-span-1">
       <div class="card bg-base-100 shadow-lg">
         <div class="card-body">
           <h2 class="card-title capitalize text-2xl">{{ pokemon.name }}</h2>
-          <img [src]="pokemon.sprites.front_default">
-          <div>
-            <img src="" alt="">
+          <div class="flex flex-col items-center">
+            <img [src]="pokemon.sprites.front_default" [width]="200" [height]="200" />
           </div>
           <div class="divider"></div>
           <div class="space-y-3">
@@ -52,7 +50,7 @@
           <h3 class="card-title text-xl mb-4">Tipos</h3>
           <div class="flex flex-wrap gap-2">
             @for (type of pokemon.types; track type.type.name) {
-            <span class="badge badge-lg capitalize">
+            <span class="bg-amber-200 rounded-2xl text-gray-900 px-5">
               {{ type.type.name }}
             </span>
             }
@@ -89,10 +87,9 @@
           <div class="space-y-2">
             @for (ability of pokemon.abilities; track ability.ability?.name) {
             <div class="flex items-center justify-between">
-              <span class="capitalize">{{ ability.ability?.name }}</span>
-              @if (ability.is_hidden) {
-              <span class="badge badge-accent">Oculta</span>
-              }
+              <span class="bg-blue-600 rounded-2xl text-gray-200 px-5">{{
+                ability.ability?.name
+              }}</span>
             </div>
             }
           </div>
@@ -103,7 +100,13 @@
 
   <!-- Back button -->
   <div class="mt-8">
-    <a href="/home" class="btn btn-outline">Volver a Pokémons</a>
+    <a 
+      routerLink="/home"
+      [queryParams]="{ offset: paginationService.currentPage() }"
+      class="btn btn-outline"
+    >
+      Volver a Pokémons
+    </a>
   </div>
   }
 </div>
